@@ -24,7 +24,7 @@ setup(
     ],
     entry_points={
         'sentry.plugins': [
-            'sentry_nightswatch = sentry_nightswatch.plugin:NightsWatchPlugin'
+            'nightswatch = nightswatch.plugin:NightsWatchPlugin'
         ]
     },
     classifiers=[
