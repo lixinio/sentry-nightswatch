@@ -3,21 +3,21 @@ from __future__ import absolute_import
 from sentry.utils.http import absolute_uri
 from sentry_plugins.client import ApiClient
 
-# https://v2.developer.pagerduty.com/docs/events-api
-INTEGRATION_API_URL = "https://events.pagerduty.com/generic/2010-04-15/create_event.json"
+INTEGRATION_API_URL = "https://paperduty.test.sre.cheanjia.net/v2/enqueue"
 
 
-class PagerDutyClient(ApiClient):
+class NightsWatchClient(ApiClient):
     client = "sentry"
-    plugin_name = "pagerduty"
+    plugin_name = "nightswatch"
     allow_redirects = False
 
-    def __init__(self, service_key=None):
+    def __init__(self, service_key=None, api_url=None):
         self.service_key = service_key
-        super(PagerDutyClient, self).__init__()
+        self.api_url = api_url
+        super(NightsWatchClient, self).__init__()
 
     def build_url(self, path):
-        return INTEGRATION_API_URL
+        return self.api_url if self.api_url else INTEGRATION_API_URL
 
     def request(self, data):
         payload = {"service_key": self.service_key}
